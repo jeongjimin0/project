@@ -34,10 +34,11 @@
     <!--답변 반복 끝-->
     <!--답변 작성-->
     <form th:action="@{|/answer/create/${question.ID}|}" method="post">
-        <textarea name="content" id="content" rows="10" class="form-control"></textarea>
+        <textarea name="CONTENT" id="CONTENT" rows="10" class="form-control"></textarea>
         <input type="submit" value="답변등록" class="btn btn-primary">
+        <a th:href="@{/}"><button class="btn btn-primary" type="button">돌아가기</button></a>
     </form>
-    <a th:href="@{/}"><button class="btn btn-primary" type="button">돌아가기</button></a>
+
 </div>
 
 </body>

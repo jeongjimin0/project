@@ -36,4 +36,9 @@ public class MybatisServiceImpl implements MybatisService {
         return mappers.getQuestion(id);
     }
 
+    @Override
+    public int addAnswer(Answer answer) {
+        return mappers.addAnswer(answer);
+    }
+
 }

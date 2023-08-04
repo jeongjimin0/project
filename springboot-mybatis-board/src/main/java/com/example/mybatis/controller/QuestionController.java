@@ -27,15 +27,17 @@ public class QuestionController {
     }
 
     @RequestMapping("/question/detail/{id}")
-    public String questionCreate(@PathVariable("id") String id, Model model) {
+    public String questionDetail(@PathVariable("id") String id, Model model) {
         Optional<Question> ex = mappers.findById(id);
-        System.out.println(ex);
         List<Answer> answer = mappers.getAnswer(id);
         Question questionList = mappers.getQuestion(id);
         model.addAttribute("answer", answer);
         model.addAttribute("question", questionList);
-        System.out.println("question : " + questionList);
-        System.out.println(answer);
         return "question_detail";
+    }
+
+    @RequestMapping("/question/create")
+    public String questionCreate() {
+        return "question_create";
     }
 }

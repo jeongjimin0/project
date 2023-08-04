@@ -1,16 +1,18 @@
-package com.example.mybatis.service;
+package com.example.mybatis.mapper;
 
 import com.example.mybatis.dao.Answer;
 import com.example.mybatis.dao.Question;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface MybatisService {
-
+public interface Mappers {
     List<Question> getList();
-
-    Question findById(String key);
+    Optional<Question> findById(String key);
     List<Answer> getAnswer(String id);
     Question getQuestion(String id);
+    int addAnswer(Answer answer);
+
+
 
 }

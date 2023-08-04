@@ -20,6 +20,7 @@
         SELECT ID, CONTENT, CREATE_DATE, QUESTION_ID
         FROM ANSWER
         WHERE QUESTION_ID = #{id}
+        ORDER BY CREATE_DATE
     </select>
 
     <select id="getQuestion" resultType="com.example.mybatis.dao.Question">
@@ -27,5 +28,15 @@
         FROM QUESTION
         WHERE ID = #{id}
     </select>
+
+    <insert id="addAnswer" useGeneratedKeys="true" keyProperty="ID" parameterType="com.example.mybatis.dao.Answer">
+        <selectKey order="BEFORE" keyProperty="ID" resultType="String">
+            SELECT
+            MAX(ID+1)
+            FROM ANSWER
+        </selectKey>
+        INSERT INTO ANSWER(ID, CONTENT, CREATE_DATE, QUESTION_ID)
+        VALUES (#{ID}, #{CONTENT}, SYSDATE, #{QUESTION_ID})
+    </insert>
 
 </mapper>
