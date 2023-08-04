@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="/bootstrap.min.css" th:href="@{/bootstrap.min.css}" rel="stylesheet">
+  <link href="/style.css" th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container-lg">
+
+  <div class="card" style="margin-top: 100px; margin-bottom: 50px; height: 0 auto;">
+    <div class="card-body">
+
+<form method="post" th:action="@{/signUp}">
+  <div class="container">
+    <h1>회원가입</h1>
+
+    <div class="container" style="width: 800px">
+
+      <div class="mb-3" style="margin-bottom: 10px">
+        <label for="username" class="form-label">사번</label>
+        <input type="text" class="form-control" name="EMPLOYEE_NO" id="username" style="height: 60px;">
+      </div>
+
+      <div class="mb-3" style="margin-bottom: 10px">
+        <label for="pw" class="form-label">비밀번호</label>
+        <input type="password" class="form-control" name="EMPLOYEE_PW" id="pw" style="height: 60px;">
+      </div>
+
+      <div class="mb-3" style="margin-bottom: 10px">
+        <label for="em_nm" class="form-label">이름</label>
+        <input type="text" class="form-control" name="EM_NAME" id="em_nm" style="height: 60px;">
+      </div>
+
+      <div class="mb-3" style="margin-bottom: 10px">
+        <label for="organiz" class="form-label">조직</label>
+        <input type="text" class="form-control" name="ORGANIZATION" id="organiz" style="height: 60px;">
+      </div>
+
+      <div class="mb-3" style="margin-bottom: 10px">
+        <label for="input" class="form-label">등록사번</label>
+        <input type="text" class="form-control" name="REGIST_USER_ID" id="input" style="height: 60px;">
+      </div>
+
+      <div class="mb-3" style="margin-bottom: 10px">
+        <label for="input2" class="form-label">최종사번</label>
+        <input type="text" class="form-control" name="UPDATE_USER_ID" id="input2" style="height: 60px; margin-bottom: 40px;">
+      </div>
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button type="submit" class="btn btn-primary" style="margin-bottom: 50px;">가입 완료</button>
+    <a th:href="@{/toy}"><button type="button" class="btn btn-primary">돌아가기</button></a>
+      </div>
+  </div>
+  </div>
+</form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

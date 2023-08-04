@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<span th:text="${user.EM_NAME}">message</span> 님의 정보
+<p>사번 : <span th:text="${user.EMPLOYEE_NO}"></span></p>
+<p>조직 : <span th:text="${user.ORGANIZATION}"></span></p>
+
+<a th:href="@{toy}">돌아가기</a>
+</body>
+</html>

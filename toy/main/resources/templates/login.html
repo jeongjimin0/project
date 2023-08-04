@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="/bootstrap.min.css" th:href="@{/bootstrap.min.css}" rel="stylesheet">
+  <link href="/style.css" th:href="@{/style.css}" rel="stylesheet">
+</head>
+
+
+
+<body>
+<div class="card" style="margin: 0 auto; height: 0 auto; width: 500px; margin-top: 180px;">
+
+  <div class="container" style="width: 500px;">
+
+  <h1 style="margin-bottom: 0px;">로그인</h1>
+    <p style="color: red; text-align: center; margin-bottom: 20px;" th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
+  <form action="/auth" method="post">
+    <div class="form-group">
+      <label th:for="username">아이디</label>
+      <input type="text" name="EMPLOYEE_NO" class="form-control" placeholder="아이디 입력해주세요">
+    </div>
+    <div class="form-group">
+      <label th:for="password">비밀번호</label>
+      <input type="password" class="form-control" name="EMPLOYEE_PW" placeholder="비밀번호 입력해주세요">
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button type="submit" class="btn btn-primary" style="margin-top: 25px; display:block; width:100%; text-align:center; margin-left:10px; margin-right:10px;">로그인</button>
+    </div>
+  </form>
+    <a class="nav-link" th:href="@{/signUp}" style="text-align: center; margin-top: 5px;">회원가입</span></a>
+  <br/>
+    </div>
+</div>
+
+
+
+</body>
+</html>
