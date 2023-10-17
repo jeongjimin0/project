@@ -1,12 +1,12 @@
-package com.example.mybatis.dao;
+package com.example.project_2.DAO;
 
 import lombok.Data;
 
 @Data
 public class Question {
-    String ID;
+    int ID;
     String SUBJECT;
     String CONTENT;
-    String CREATE_DATE;
+    String CREATEDATE;
     Answer answer;
 }

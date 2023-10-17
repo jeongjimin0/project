@@ -1,10 +1,10 @@
-package com.example.mybatis;
+package com.example.project_2;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MybatisApplicationTests {
+class Project2ApplicationTests {
 
 	@Test
 	void contextLoads() {

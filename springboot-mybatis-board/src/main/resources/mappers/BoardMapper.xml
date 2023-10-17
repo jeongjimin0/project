@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.project_2.Repository.BoardMapper">
+
+    <select id="getList" resultType="com.example.project_2.DAO.Question">
+        SELECT ID, CONTENT, SUBJECT, CREATEDATE
+        FROM QUESTION
+    </select>
+
+    <select id="getQuestion" resultType="com.example.project_2.DAO.Question">
+        SELECT ID, SUBJECT, CONTENT
+        FROM QUESTION
+        WHERE ID = #{id}
+    </select>
+
+    <insert id="addAnswer" useGeneratedKeys="true" parameterType="com.example.project_2.DAO.Answer">
+        <selectKey keyProperty="ID" resultType="int" order="BEFORE">
+            select nvl(max(id),0) + 1 FROM ANSWER
+        </selectKey>
+        INSERT INTO ANSWER(ID, CONTENT, CREATEDATE, QUESTION)
+        VALUES (#{ID}, #{CONTENT}, SYSDATE, #{QUESTION})
+    </insert>
+
+    <select id="getAnswer" resultType="com.example.project_2.DAO.Answer">
+        SELECT ID, CONTENT, CREATEDATE, QUESTION
+        FROM ANSWER
+        WHERE QUESTION = #{id}
+    </select>
+
+    <insert id="addQuestion" useGeneratedKeys="true" parameterType="com.example.project_2.DAO.Question">
+        <selectKey keyProperty="ID" resultType="int" order="BEFORE">
+            select nvl(max(id),0) + 1 FROM QUESTION
+        </selectKey>
+        INSERT INTO QUESTION(ID, SUBJECT, CONTENT, CREATEDATE)
+        VALUES (#{ID}, #{SUBJECT}, #{CONTENT}, SYSDATE)
+    </insert>
+
+    <select id="answerCnt" resultType="int">
+        SELECT nvl(COUNT(*), 0) AS CNT
+        FROM ANSWER
+        <include refid="test"/>
+    </select>
+
+    <sql id = "test">
+        GROUP BY QUESTION
+        HAVING QUESTION = #{id}
+    </sql>
+
+    <select id="authorGetList" resultType="com.vam.domain.AuthorVO">
+        SELECT
+        authorid, authorname, nationid, regdate, updatedate
+        FROM
+        vam_author
+        <if test="keyword != null">
+            WHERE
+            authorname
+            LIKE
+            concat('%', #{keyword}, '%')
+        </if>
+        ORDER BY
+        authorid
+        DESC
+        LIMIT #{skip}, #{amount}
+    </select>
+
+    <select id="authorGetTotal" resultType="int">
+        SELECT
+        count(*)
+        FROM
+        vam_author
+        <if test="keyword != null">
+            WHERE
+            authorname
+            LIKE
+            concat('%', #{keyword}, '%')
+        </if>
+    </select>
+
+
+</mapper>

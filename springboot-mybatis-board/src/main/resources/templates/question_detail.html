@@ -2,43 +2,60 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <link href="/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link href="/style.css" th:href="@{/css/style.css}" rel="stylesheet">
-    <title>질문 상세</title>
+    <title>질문상세</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">PROJECT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">로그인</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container my-3">
     <!--질문-->
     <h2 class="border-bottom py-2" th:text="${question.SUBJECT}"></h2>
     <div class="card my-3">
         <div class="card-body">
-            <div class="card-text" style="white-space: pre-line; color: red;
-" th:text="${question.CONTENT}"></div>
+            <div class="card-text" style="white-space: pre-line;" th:text="${question.CONTENT}"></div>
             <div class="d-flex justify-content-end">
-
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <div th:text="${(question.CREATEDATE)}"></div>
+                    <div th:text="${#lists.size('Answer')}"></div>
+                </div>
             </div>
         </div>
     </div>
     <!--답변의 갯수표시-->
+
     <!--#list.size(이터러블객체)-타임리프가 제공하는 유틸리티로 객체의 길이를 반환-->
     <!--답변 반복 시작-->
-    <div class="card my-3" th:each="answer : ${answer}">
+    <div class="card my-3" th:each="answer : ${Answer}">
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;" th:text="${answer.CONTENT}"></div>
             <div class="d-flex justify-content-end">
-
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <div th:text="${answer.CREATEDATE}"></div>
+                </div>
             </div>
         </div>
     </div>
     <!--답변 반복 끝-->
     <!--답변 작성-->
-    <form th:action="@{|/answer/create/${question.ID}|}" method="post">
+    <form th:action="@{|/answer/create/${question.ID}|}" method="post" class="my-3">
         <textarea name="CONTENT" id="CONTENT" rows="10" class="form-control"></textarea>
-        <input type="submit" value="답변등록" class="btn btn-primary">
-        <a th:href="@{/}"><button class="btn btn-primary" type="button">돌아가기</button></a>
+        <input type="submit" value="답변등록" class="btn btn-primary my-2">
     </form>
-
 </div>
 
 </body>
