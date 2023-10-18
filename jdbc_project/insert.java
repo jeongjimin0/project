@@ -1,4 +1,4 @@
-package inzent.project.batch;
+package batch_file;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
