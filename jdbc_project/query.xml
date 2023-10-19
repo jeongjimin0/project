@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+
+<properties>
+	<entry key="selectinsert">
+	INSERT INTO 
+	INTEGRATION_INFO
+	(ELEMENTID, IMG_KEY, MAIN_CATEGORY, SEQ_NO, DOC_CD, FILE_NM, REGIST_USER_ID, UPDATE_USER_ID, REGIST_DATE, UPDATE_DATE) 
+	SELECT 
+	ELEMENTID, IMG_KEY, '공통', 1, DOC_CD, FILE_NM, ENR_ORG_CD, ENR_ORG_CD, ENR_DTM, ENR_DTM 
+	FROM 
+	XTORM.BIZ_INFO 
+	WHERE 
+	IMG_KEY LIKE ?
+	</entry>
+	
+	<entry key="delete">
+	DELETE FROM
+	INTEGRATION_INFO
+	WHERE 
+	IMG_KEY LIKE ?
+	</entry>
+		
+</properties>
