@@ -1,4 +1,4 @@
-package batch_file;
+
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,8 +20,8 @@ public class Batch {
 			
 			
 			
-	        String resource = "C:\\Users\\정지민\\Desktop\\test\\File search\\src\\db.properties";
-	        String resource2 = "C:\\Users\\정지민\\Desktop\\test\\File search\\src\\batch_file\\query.xml";
+	        String resource = "C:\\Users\\정지민\\Desktop\\test\\Test\\src\\db.properties";
+	        String resource2 = "C:\\Users\\정지민\\Desktop\\test\\Test\\src\\query.xml";
 	        Properties properties = new Properties();
 	        Properties properties2 = new Properties();
 	        int end = 0;
@@ -47,7 +47,7 @@ public class Batch {
 				
 		        con = DriverManager.getConnection(url, user, passwd);
 				System.out.println("DB연결 성공");
-				System.out.println("0: 이관 \t 1: 삭제 \t 3: 뒤로가기");
+				System.out.println("0: 이관 \t 1: 삭제 \t 2: 뒤로가기");
 				Scanner scanner3 = new Scanner(System.in);
 				menu = scanner3.nextInt();
 				
@@ -83,7 +83,7 @@ public class Batch {
 				System.out.println( d + "개 삭제되었습니다.");
 				break;
 				
-				case 3:
+				case 2:
 					break;
 				
 				default:
