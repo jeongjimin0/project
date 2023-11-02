@@ -17,5 +17,10 @@ public class MemberImpl implements MemberService{
         return memberMapper.addQuestion(memberVO);
     }
 
+    @Override
+    public int idCheck(String memberId) {
+        return memberMapper.idCheck(memberId);
+    }
+
 
 }

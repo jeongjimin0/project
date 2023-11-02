@@ -5,7 +5,11 @@
 <mapper namespace="com.example.shoppingmall.DAO.MemberMapper">
     <insert id="addQuestion">
         INSERT INTO BOOK_NUMBER
-        VALUES(#{memberId}, #{memberPw}, #{memberName}, #{memberMail}, #{memberAddr1}, #{memberAddr2}, #{memberAddr3}, 0, sysdate, 100000, 5000 )
+        VALUES(#{memberId}, #{memberPw}, #{memberName}, #{memberMail}, #{memberAddr1}, #{memberAddr2}, #{memberAddr3}, 0, sysdate, 100000, 5000)
     </insert>
+
+    <select id="idCheck" resultType="int">
+        select count(*) from BOOK_NUMBER where memberId = #{memberId}
+    </select>
 
 </mapper>

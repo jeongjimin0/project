@@ -8,4 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MemberMapper {
 
     int addQuestion(MemberVO memberVO);
+    int idCheck(String memberId);
+
 }
