@@ -49,7 +49,7 @@ public class MemberController {
         rawPw = memberVO.getMemberPw();
         encodePw = pwEncoder.encode(rawPw);
         memberVO.setMemberPw(encodePw);
-        System.out.println(encodePw);
+
 
         memberService.addQuestion(memberVO);
 
@@ -100,31 +100,48 @@ public class MemberController {
     }
 
     @PostMapping("/member/login")
-    public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr, Model model) throws Exception{
+    public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr, Model model) throws Exception {
         // HttpServletRequest 는 로그인 성공 시 session 에 회원 정보를 저장하기 위해,
         // RedirectAttributes 는 로그인 실패 시 리다이렉트 된 로그인 페이지에 실패를 의미하는 데이터를 전송하기 위해 사용
 
         // 세션 사용하기 위한 선언
+
+        String rawPw = "";
+        String encodePw = "";
         HttpSession session = request.getSession();
+
         MemberVO lvo = memberService.memberLogin(member);
 
+        if (lvo != null) { // 일치하는 아이디 존재 시
+            rawPw = member.getMemberPw(); // 사용자가 제출한 비밀번호
+            encodePw = lvo.getMemberPw(); // 데이터베이스에 저장한 인코딩된 비밀번호
 
-        if (lvo == null) {
-            int result = 0;
-            rttr.addFlashAttribute("result", result);
-            model.addAttribute("login", 1);
+            if (true == pwEncoder.matches(rawPw, encodePw)) { // 비밀번호 일치 판단
+
+                lvo.setMemberPw(""); // 인코딩된 비밀번호 정보 지움
+                session.setAttribute("member", lvo); // session 에 사용자의 정보 저장
+                bookController.setRes(lvo); // 로그인 된 session 을 넘겨줌
+                return "redirect:/main"; // 메인페이지 이동
+
+            } else {
+                rttr.addFlashAttribute("result", 0);
+                return "redirect:/member/login"; // 로그인 페이지 이동
+            }
+        } else { // 일치하는 아이디가 존재하지 않을 시 (로그인 실패)
+            rttr.addFlashAttribute("result", 0);
             return "redirect:/member/login";
-
         }
 
-        session.setAttribute("member", lvo);
-        MemberVO mem = (MemberVO) session.getAttribute("member");
-        bookController.setRes(mem);
-
-
-        return "redirect:/main";
     }
 
+    @ResponseBody  // ajax 를 통해서 서버에 요청을 하는 방식이기 때문에 해당 메서드에 반드시 @ResponseBody  어노테이션을 붙여주어야 한다.
+    @GetMapping("/member/logout")
+    public void logoutMainGet(HttpServletRequest request) throws Exception{
+        HttpSession session = request.getSession();
+        session.invalidate();
+        bookController.setRes(null);
+
+    }
 
 
 }

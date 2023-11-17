@@ -5,12 +5,36 @@
     <title>메인페이지</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="wrapper">
     <div class="wrap">
         <div class="top_gnb_area">
-            <h1>gnb area</h1>
+            <ul class="list">
+                <li th:if="${member} == null">
+                    <a th:href="@{/member/login}">로그인</a>
+                </li>
+                <li th:if="${member} == null">
+                    <a th:href="@{/member/join}">회원가입</a>
+                </li>
+                <li th:if="${member != null} and ${member.adminCk == 1}"><a th:href="@{/admin/main}">관리자 페이지</a></li>
+                <li th:if="${member != null}">
+                    <a id="gnb_logout_button">로그아웃</a>
+                </li>
+                <li th:if="${member != null}">
+                    마이룸
+                </li>
+                <li th:if="${member != null}">
+                    장바구니</li>
+                <li>
+                    고객센터
+                </li>
+            </ul>
+
         </div>
         <div class="top_area">
             <div class="logo_area">
@@ -27,10 +51,12 @@
                 </div>
                 </div>
                 <span th:if="${member} == null"><a th:href="@{/member/join}">회원가입</a></span>
+
                     <div class="login_success_area" th:if="${member != null}">
-                        회원 : <span th:text="${member.memberName}"></span>
-                        충전금액 : <span th:text="${member.money}"></span>
-                        포인트 : <span th:text="${member.point}"></span>
+                        <span th:text="${member.memberName}"></span>
+                        <span th:text="${member.money}"></span>
+                        <span th:text="${member.point}"></span>
+                        <a th:href="@{/member/logout}">로그아웃</a>
                     </div>
 
             </div>
@@ -44,5 +70,24 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    /* gnb_area 로그아웃 버튼 작동 */
+    $("#gnb_logout_button").click(function(){
+        //alert("버튼 작동");
+        $.ajax({
+            type:"GET",
+            url:"/member/logout",
+            success:function(data){
+                alert("로그아웃 성공");
+                window.location.reload(true);
+            }
+        }); // ajax
+    });
+
+</script>
+
+
 </body>
 </html>

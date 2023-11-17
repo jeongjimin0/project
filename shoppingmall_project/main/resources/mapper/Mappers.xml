@@ -14,11 +14,11 @@
 
     <select id="memberLogin" resultType="com.example.shoppingmall.VO.MemberVO">
 
-        select memberId, memberName, adminck, money, point
+        select memberId, memberPw, memberName, adminck, money, point
         from
         book_number
         where
-        memberId = #{memberId} and memberPw = #{memberPw}
+        memberId = #{memberId}
     </select>
 
 </mapper>
