@@ -12,4 +12,13 @@
         select count(*) from BOOK_NUMBER where memberId = #{memberId}
     </select>
 
+    <select id="memberLogin" resultType="com.example.shoppingmall.VO.MemberVO">
+
+        select memberId, memberName, adminck, money, point
+        from
+        book_number
+        where
+        memberId = #{memberId} and memberPw = #{memberPw}
+    </select>
+
 </mapper>

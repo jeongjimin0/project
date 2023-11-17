@@ -5,7 +5,7 @@
 
 /* 화면 전체 렙 */
 .wrapper{
-	width: 1900px;
+	width: 100%;
 }
 
 /* content 랩 */
@@ -267,3 +267,38 @@
 	#mail_check_input_box_true{
 	    background-color: white;
 	}
+
+	.correct{
+        color : green;
+    }
+    .incorrect{
+        color : red;
+    }
+
+    .final_id_ck{
+        display: none;
+    }
+    .final_pw_ck{
+        display: none;
+    }
+    .final_pwck_ck{
+        display: none;
+    }
+    .final_name_ck{
+        display: none;
+    }
+    .final_mail_ck{
+        display: none;
+    }
+    .final_addr_ck{
+        display: none;
+    }
+
+    .pwck_input_re_1{
+            color : green;
+            display : none;
+    }
+    .pwck_input_re_2{
+            color : red;
+            display : none;
+    }

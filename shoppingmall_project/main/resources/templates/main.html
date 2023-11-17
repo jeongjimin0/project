@@ -20,8 +20,19 @@
                 <h1>Search area</h1>
             </div>
             <div class="login_area">
-                <div class="login_button"><a th:href="@{/member/login}">로그인</a></div>
-                <span><a th:href="@{/member/join}">회원가입</a></span>
+
+                <div th:if="${member == null}">
+                <div class="login_button">
+                    <a th:href="@{/member/login}">로그인</a>
+                </div>
+                </div>
+                <span th:if="${member} == null"><a th:href="@{/member/join}">회원가입</a></span>
+                    <div class="login_success_area" th:if="${member != null}">
+                        회원 : <span th:text="${member.memberName}"></span>
+                        충전금액 : <span th:text="${member.money}"></span>
+                        포인트 : <span th:text="${member.point}"></span>
+                    </div>
+
             </div>
             <div class="clearfix"></div>
         </div>
