@@ -75,18 +75,18 @@
 
     /* gnb_area 로그아웃 버튼 작동 */
     $("#gnb_logout_button").click(function(){
-        //alert("버튼 작동");
         $.ajax({
-            type:"GET",
-            url:"/member/logout",
+            type:"POST",
+            url:"/logout.do",
             success:function(data){
                 alert("로그아웃 성공");
-                window.location.reload(true);
+                document.location.reload();
             }
         }); // ajax
     });
 
 </script>
+
 
 
 </body>

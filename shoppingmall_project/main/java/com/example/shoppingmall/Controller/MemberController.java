@@ -23,6 +23,7 @@ import java.util.Random;
 public class MemberController {
 
     private final MemberService memberService;
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -52,7 +53,6 @@ public class MemberController {
 
 
         memberService.addQuestion(memberVO);
-
         return "redirect:/main";
     }
 
@@ -99,7 +99,7 @@ public class MemberController {
         return num;
     }
 
-    @PostMapping("/member/login")
+    @PostMapping("/member/login.do")
     public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr, Model model) throws Exception {
         // HttpServletRequest 는 로그인 성공 시 session 에 회원 정보를 저장하기 위해,
         // RedirectAttributes 는 로그인 실패 시 리다이렉트 된 로그인 페이지에 실패를 의미하는 데이터를 전송하기 위해 사용
@@ -134,9 +134,21 @@ public class MemberController {
 
     }
 
-    @ResponseBody  // ajax 를 통해서 서버에 요청을 하는 방식이기 때문에 해당 메서드에 반드시 @ResponseBody  어노테이션을 붙여주어야 한다.
+
     @GetMapping("/member/logout")
-    public void logoutMainGet(HttpServletRequest request) throws Exception{
+    public String logoutMainGet(HttpServletRequest request) throws Exception{
+        HttpSession session = request.getSession();
+        session.invalidate();
+        bookController.setRes(null);
+        return "redirect:/main";
+    }
+
+    /* 비동기방식 로그아웃 메서드 */
+    @RequestMapping(value="logout.do", method=RequestMethod.POST)
+    @ResponseBody // ajax 를 통해서 서버에 요청을 하는 방식이기 때문에 해당 메서드에 반드시 @ResponseBody 어노테이션을 붙여줘야 합니다.
+    public void logoutPOST(HttpServletRequest request) throws Exception{
+
+        System.out.println("비동기 메서드 진입");
         HttpSession session = request.getSession();
         session.invalidate();
         bookController.setRes(null);
