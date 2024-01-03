@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>메인페이지</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+<h1 class="animate__animated animate__bounce">An animated element</h1>
+<div class="wrapper">
+    <div class="wrap">
+        <div class="top_gnb_area">
+            <ul class="list">
+                <li th:if="${member} == null">
+                    <a th:href="@{/member/login}">로그인</a>
+                </li>
+                <li th:if="${member} == null">
+                    <a th:href="@{/member/join}">회원가입</a>
+                </li>
+                <li th:if="${member != null} and ${member.adminCk == 1}"><a th:href="@{/admin/main}">관리자 페이지</a></li>
+                <li th:if="${member != null}">
+                    <a id="gnb_logout_button">로그아웃</a>
+                </li>
+                <li th:if="${member != null}">
+                    마이룸
+                </li>
+                <li th:if="${member != null}">
+                    장바구니</li>
+                <li>
+                    고객센터
+                </li>
+            </ul>
+
+        </div>
+        <div class="top_area">
+            <div class="logo_area">
+                <a th:href="@{/main}"><img src="/img/down.png"></a>
+            </div>
+            <div class="search_area">
+                <h1>Search area</h1>
+            </div>
+            <div class="login_area">
+
+                <div th:if="${member == null}">
+                <div class="login_button">
+                    <a th:href="@{/member/login}">로그인</a>
+                </div>
+                </div>
+                <span th:if="${member} == null"><a th:href="@{/member/join}">회원가입</a></span>
+
+                    <div class="login_success_area" th:if="${member != null}">
+                        <span th:text="${member.memberName}"></span>
+                        <span th:text="${member.money}"></span>
+                        <span th:text="${member.point}"></span>
+                        <a th:href="@{/member/logout}">로그아웃</a>
+                    </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="navi_bar_area">
+            <h1>navi area</h1>
+        </div>
+        <div class="content_area">
+            <h1>content area</h1>
+        </div>
+
+        <!-- Footer 영역 -->
+        <div class="footer_nav">
+            <div class="footer_nav_container">
+                <ul>
+                    <li>회사소개</li>
+                    <span class="line">|</span>
+                    <li>이용약관</li>
+                    <span class="line">|</span>
+                    <li>고객센터</li>
+                    <span class="line">|</span>
+                    <li>광고문의</li>
+                    <span class="line">|</span>
+                    <li>채용정보</li>
+                    <span class="line">|</span>
+                </ul>
+            </div>
+        </div> <!-- class="footer_nav" -->
+
+        <div class="footer">
+            <div class="footer_container">
+
+                <div class="footer_left">
+                    <img src="img/down.png">
+                </div>
+                <div class="footer_right">
+                    (주) VamBook    대표이사 : OOO
+                    <br>
+                    사업자등록번호 : ooo-oo-ooooo
+                    <br>
+                    대표전화 : oooo-oooo(발신자 부담전화)
+                    <br>
+                    COPYRIGHT(C) <strong>kimvampa.tistory.com</strong>    ALL RIGHTS RESERVED.
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div> <!-- class="footer" -->
+    </div>
+</div>
+
+
+<script>
+
+    /* gnb_area 로그아웃 버튼 작동 */
+    $("#gnb_logout_button").click(function(){
+        $.ajax({
+            type:"POST",
+            url:"/logout.do",
+            success:function(data){
+                alert("로그아웃 성공");
+                document.location.reload();
+            }
+        }); // ajax
+    });
+
+</script>
+
+
+
+</body>
+</html>
