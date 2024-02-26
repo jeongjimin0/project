@@ -13,6 +13,8 @@ public class ImageReader {
 		String directoryPath = "C:\\test\\Image";
 		String imagePath;
 		
+		
+		
 		ExecutorService executorService = Executors.newFixedThreadPool(10); // 10개의 스레드 사용
         
 		ArrayList<String> imageNames = findImageNames(directoryPath);
@@ -71,12 +73,12 @@ public class ImageReader {
 	            File[] files = directory.listFiles();
 	            if (files != null) {
 	                for (File file : files) {
-//	                    if (file.isDirectory()) {
+	                    if (file.isDirectory()) {
 //	                        // 하위 디렉토리에 대해 재귀적으로 탐색
 //	                    	// 재귀적 탐색이 필요없을 경우 삭제
 	                		System.out.println("file.get_name : " + file.getName());
-//	                        imageFiles.addAll(findImageFiles(file));
-//	                    } else {
+	                        imageFiles.addAll(findImageFiles(file));
+	                    } else {
 	                        // 파일이 이미지 파일인지 확인
 //	                        String fileName = file.getName().toLowerCase();
 //	                        if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") ||
@@ -85,8 +87,9 @@ public class ImageReader {
 	                            imageFiles.add(file);
 	                            System.out.println(imageFiles);
 //	                        }
-	                    }
-	                }
+	                    	}
+	                	}
+	            	}
 	            }
 //	        }
 
