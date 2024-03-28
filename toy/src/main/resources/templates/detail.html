@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:XTORM_MAIN="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/bootstrap.min.css" th:href="@{/bootstrap.min.css}" rel="stylesheet">
+    <link href="/style.css" th:href="@{/style.css}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+</head>
+
+<body>
+<!--<table style="text-align: center">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>이미지키</th>-->
+<!--        <th>문서 번호</th>-->
+<!--        <th>문서 분류</th>-->
+<!--        <th>중분류</th>-->
+<!--        <th>서식명</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="board: ${list}">-->
+<!--        <td th:text="${board.business.IMG_KEY}"></td>-->
+<!--        <td th:text="${board.DOC_CD}"></td>-->
+<!--        <td th:text="${board.category.MAIN_CATEGORY}"></td>-->
+<!--        <td th:text="${board.category.MEDIUM_CATEGORY}"></td>-->
+<!--        <td th:text="${board.category.DETAIL_CATEGORY}"></td>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--</table>-->
+
+<div class="container-lg">
+
+
+<div class="find_btn">
+
+    <div class="child" th:text="${list2}"></div>
+    <div style="text-align : center; margin-bottom: 60px;">다운로드를 진행하신 후 파일 보기 버튼을 눌러주세요.</div>
+    <table class="table table-hover" style= "table-layout: fixed;">
+        <thead style="border-color: gray">
+        <tr>
+            <th width="9%">삭제</th>
+            <th width="10%">순서</th>
+            <th width="10%">대분류</th>
+            <th width="21%">서식명</th>
+            <th width="20%">다운로드</th>
+            <th width="20%">조회</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <!---->
+
+        <tr th:each="Business, index : ${list}">
+            <td>
+                <input class="form-check-input mt-0" type="checkbox" name="IMG_KEY" th:value="${Business.IMG_KEY}" aria-label="Checkbox for following text input"></a>
+            </td>
+            <td th:text="${Business.RNUM}"></td>
+
+            <td th:text="${Business.MAIN_CATEGORY}"></td>
+            <td th:text="${Business.category.DETAIL_CATEGORY}"></td>
+            <form method="get" action="/toy/download" target="iframe1">
+            <td>
+                <input class="find-btn1" type='submit' value='download' onclick='btnActive()'/>
+                <input type='hidden' name="ELEMENTID" th:value="${Business.ELEMENTID}"/>
+                <iframe id="iframe1" name="iframe1" style="display:none"></iframe>
+            </td>
+            </form>
+            <form method="get" action="/download/{fileName}" target="_blank">
+            <td>
+                <span class="d-inline-block" tabindex="10" data-bs-toggle="tooltip" data-bs-title="Disabled tooltip">
+                <a href="/download/{fileName}" target="_blank"><input class="find-btn1 target_btn" type='submit' disabled value='파일 보기' onclick='btnActive2()' />
+                <input type='hidden' name="ELEMENTID" th:value="${Business.ELEMENTID}"/></a>
+                </span>
+            </td>
+            </form>
+        </tr>
+
+        </tbody>
+    </table>
+
+<!--<span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-title="Disabled tooltip">-->
+<!--<a href="/download/{fileName}" target="_blank"><input class="find-btn1" id='target_btn' type='button' disabled value='파일 보기'/></a>-->
+<!--</span>-->
+
+
+<script src="http://ajax.googlepis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+
+function btnActive()  {
+    const clickedBtn = event.target;
+    console.log(clickedBtn);
+    const changeBtn = clickedBtn.closest('tr').querySelector('.target_btn');
+    changeBtn.disabled = false;
+
+}
+</script>
+
+</div>
+
+
+    <form th:action="@{/toy/delete}" method="GET">
+<a th:href="@{/toy}"><button style="float:right; margin-top: 10px;" class="btn btn-primary" type="button">돌아가기</button></a>
+    <button class="btn btn-primary" type="submit">삭제</button></a>
+    </form>
+</div>
+</body>
+</html>
